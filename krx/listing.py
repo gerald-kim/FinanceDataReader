@@ -145,7 +145,7 @@ class KrxAdministrative:
 
     def read(self):
         url = "http://kind.krx.co.kr/investwarn/adminissue.do?method=searchAdminIssueSub&currentPageSize=5000&forward=adminissue_down"
-        df = pd.read_html(url, header=0)[0]
+        df = pd.read_html(url, header=0, converters={'종목코드': str})[0]
         df['지정일'] = pd.to_datetime(df['지정일'])
         col_map = {'종목코드':'Symbol', '종목명':'Name', '지정일':'DesignationDate', '지정사유':'Reason'}
         df.rename(columns=col_map, inplace=True)    
